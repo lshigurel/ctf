@@ -1,3 +1,4 @@
+#-*-coding:gb2312-*-
 import requests
 flag = ''
 url = "http://80.endpoint-937257753a42410f8b8e78ee52ca818a.m.ins.cloud.dasctf.com:81/login.php"

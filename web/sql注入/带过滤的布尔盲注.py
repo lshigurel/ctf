@@ -3,7 +3,7 @@ import string
 s = string.printable
 flag = ''
 
-url = 'http://122.51.52.109:7005/index2.php'
+url = 'http://80.endpoint-3d672d4939244f01a4b8a8d020f7ce25.m.ins.cloud.dasctf.com:81/index.php'
 
 def find_char():
     c = None
