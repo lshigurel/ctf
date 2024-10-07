@@ -41,10 +41,6 @@ class student{
     // 序列化对象，输出"sleep"
     public function __sleep(){
         echo "\nsleep";
-    } 
-    // 唤醒对象，输出"wakeup"
-    public function __wakeup(){
-        echo "\nwakeup"; 
     }
     // 判断属性$name是否存在，输出"isset"
     public function __isset($name){
